@@ -1,0 +1,42 @@
+
+<h1> Register new service or get an OAUTH2 token</h1>
+
+<form action="" method="post">
+<table width="30%">
+    <tr>
+        <td>Choose client:</td>
+        <td><select name="clientName">
+            {{range $val := .clients}}
+                <option value="{{ $val }}">{{ $val }}</option>
+            {{end}}
+        </select>
+        </td>
+    </tr>
+    <tr>
+        <td>Secret:</td>
+        <td><input type="text"  name="secret" id="secret"><label for="secret">secret</label> </td>
+    </tr>
+</table>
+<input type="submit" name="submit" value="Authorize" style="width: 100px; height: 40px">
+</form>
+
+
+<form action="" method="post">
+    <table width="30%">
+        <tr>
+            <td>Client id:</td>
+            <td><input type="text" name ="newClientId" id="clientId"><label for="clientId">Put name</label> </td>
+
+        </tr>
+        <tr>
+            <td>Secret:</td>
+            <td><input type="text"  name="newSecret" id="secret"><label for="secret">At least 6 symbols!</label> </td>
+        </tr>
+        <tr>
+            <td>Callback url:</td>
+            <td><input type="text"  name="callbackURL" id="secret"><label for="secret"></label> </td>
+        </tr>
+
+    </table>
+    <input type="submit" name = "submit" value="Create client" style="width: 100px; height: 40px">
+</form>

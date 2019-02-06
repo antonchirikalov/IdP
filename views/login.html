@@ -1,0 +1,73 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="application-name" content="Hiveon ID">
+    <meta name="msapplication-TileColor" content="#1f2228">
+    <meta name="theme-color" content="#1f2228">
+    <link rel="safari-pinned-tab" href="/assets/safari-pinned-tab.svg">
+    <meta name="apple-mobile-web-app-title" content="Hiveon ID">
+    <title>Hiveon ID Log In</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script charset="utf-8" src="/assets/jquery.min.js"></script>
+    <link rel="preload" href="/assets/logo.svg" as="image">
+    <link type="image/x-icon" rel="icon" href="/assets/favicon-32x32.png">
+    <link rel="stylesheet" href="/assets/styles.css" class="rel">
+    <link rel="stylesheet" href="/fonts/Gilroy/gilroy.css" class="rel">
+    <link rel="stylesheet" href="/fonts/OpenSans/opensans.css" class="rel">
+</head>
+
+
+<body>
+<form action="" method="post">
+<div class="main">
+    <div class="container">
+        <img src="/assets/logo.svg" width="200" height="60" alt="Hiveon ID" class="logo">
+        <h1><span class="thin">Log in with your </span>Hiveon ID</h1>
+        <form method="post">
+            <div class="input-container">
+                <input type="text" name="email" placeholder="Login or Email" autocomplete="on" />
+                <div class="error"></div>
+            </div>
+            <div class="input-container">
+                <input type="password" name="password" placeholder="Password" autocomplete="on" required value="" />
+                <span class="eye" alt="Hide/Show password"></span>
+                <div class="error"></div>
+            </div>
+            <div class="input-container">
+                <input type="text" name="twofa" placeholder="2FA Code (if enabled)" autocomplete="off" />
+                <div class="error"></div>
+            </div>
+            <div class="input-container">
+                <label>
+                    <input name="remebmer" type="checkbox" value="1">
+                    <span class="noselect">Remember me</span>
+                </label>
+            </div>
+            <input type="hidden" name="timezone" value="">
+            <input type="hidden" name="utc" value="">
+            <input type="hidden" name="_csrf" value="{{.csrfToken}}">
+            <input type="hidden" name="challenge" value="{{.challenge}}">
+            <button class="submit" type="submit"><span>Log in</span></button>
+            <div class="away">
+                <span>Don't have an account yet?                        </span>
+                <a href="/register?login_challenge={{.challenge}}" class="goto">
+                    <span>Register</span>
+                </a>
+            </div>
+            <div class="away">
+                <span>Forgot your password?                        </span>
+                <a href="/recover" class="goto">
+                    <span>Recover</span>
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+<script charset="utf-8" src="/assets/scripts.js"></script>
+</form>
+</body>
+
+</html>

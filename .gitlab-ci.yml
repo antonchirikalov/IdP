@@ -1,0 +1,17 @@
+stages:
+  - build-idp
+#  - deploy-idp-dev
+#  - deploy-idp-stage
+
+before_script:
+  - docker login -u gitlab-ci-token -p "${CI_JOB_TOKEN}" ${CI_REGISTRY}
+
+build-idp:
+  only:
+    - master
+    - dev
+  stage: build-idp
+  tags: [hiveon-id,build]
+  script:
+    - docker build . -t ${CI_REGISTRY}/hiveon-id/idp:${CI_PIPELINE_ID} -t ${CI_REGISTRY}/hiveon-id/idp:latest
+    - docker push ${CI_REGISTRY}/hiveon-id/idp

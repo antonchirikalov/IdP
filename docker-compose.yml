@@ -1,0 +1,55 @@
+version: '2'
+
+services:
+
+  idp:
+    container_name: idp
+    image: registry.tor.ph/go/hiveon-api/idp:latest
+    ports:
+      - "3000:3000"
+    links:
+      - "hydra:hydra"
+  hydra:
+    container_name: hydra
+    image: oryd/hydra
+    depends_on:
+      - hydra_migrate
+    ports:
+      # Public port
+      - "4444:4444"
+      # Admin port
+      - "4445:4445"
+      # Port for hydra token user
+      - "5555:5555"
+    command:
+      serve all --dangerous-force-http
+    environment:
+      - OAUTH2_ISSUER_URL=http://localhost:4444
+      - OAUTH2_CONSENT_URL=http://idp:3000/consent
+      - OAUTH2_LOGIN_URL=http://idp:3000/login
+      - DATABASE_URL=postgres:/postgre:postgres@116.203.56.122:5432/hydra?sslmode=disable
+      - SYSTEM_SECRET=SDhzrsAv94Lx5ivkBeXVtesLtLkAcQKB
+      - LOG_LEVEL=debug
+ 
+  hydra_migrate:
+    image: oryd/hydra:v1.0.0-rc.5_oryOS.10-alpine 
+    command: migrate sql -e 
+    environment:
+       - DATABASE_URL=postgres:/postgre:postgres@116.203.56.122:5432/hydra?sslmode=disable
+       - SYSTEM_SECRET=SDhzrsAv94Lx5ivkBeXVtesLtLkAcQKB
+       - LOG_LEVEL=debug
+
+
+  portainer:
+    image: portainer/portainer
+    container_name: portainer
+    command: -H unix:///var/run/docker.sock
+    restart: "no"
+    ports:
+      - "9000:9000"
+    volumes:
+     - /var/run/docker.sock:/var/run/docker.sock
+     - portainer_data:/data
+
+volumes:
+  portainer_data:
