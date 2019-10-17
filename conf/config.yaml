@@ -15,8 +15,8 @@ postgres:
   host: "116.203.56.122"
   port: "5432"
   dbName: "oauth"
-  user: "postgres"
-  password: "postgres"
+  user: 
+  password: 
 
 notification:
   active: "true"
