@@ -5,12 +5,12 @@ httpaddr: "0.0.0.0"
 hydraURL: "http://hydra:4445"
 hydraAPI: "http://hydra:4444"
 clientId: "test"
-clientSecret: "secret"
+clientSecret: 
 remember_for: 3600
 
 postgres:
   host: "hiveon-psql-de.devopscli.com"
   port: "5432"
   dbName: "oauth"
-  user: "postgres"
-  password: "postgres"
+  user: 
+  password: 
